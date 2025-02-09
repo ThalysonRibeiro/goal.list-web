@@ -1,7 +1,7 @@
 import { api } from "@/services/apiClient";
 import Router from "next/router";
-import { destroyCookie, setCookie } from "nookies";
-import { createContext, ReactNode, useState } from "react";
+import { destroyCookie, parseCookies, setCookie } from "nookies";
+import { createContext, ReactNode, useEffect, useState } from "react";
 import axios from 'axios';
 
 
@@ -59,6 +59,25 @@ export function AuthProvider({ children }: AuthProviderProps) {
   const isAuthenticated = !!user;
   const [errorCreate, setErrorCreate] = useState<ErrorCreate>();
 
+  useEffect(() => {
+    const { '@goallist.token': token } = parseCookies();
+    if (token) {
+      api.get('/me').then(response => {
+        const { id, name, email } = response.data;
+        setUser({
+          id,
+          name,
+          email
+        });
+      })
+        .catch(() => {
+          signOut();
+        })
+    }
+
+  }, []);
+
+
   async function signIn({ email, password }: SiginInProps) {
 
     try {
@@ -68,8 +87,6 @@ export function AuthProvider({ children }: AuthProviderProps) {
       });
 
       const { id, name, email: responseEmail, token } = response.data;
-
-      console.log(response.data);
 
 
       setCookie(undefined, '@goallist.token', token, {

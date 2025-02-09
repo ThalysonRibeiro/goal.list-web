@@ -3,8 +3,10 @@ import logoImg from "@/assets/logo-goallist.png";
 import { Geist, Geist_Mono } from "next/font/google";
 import { CheckCircle, List, ArrowRight, Star, Shield } from 'lucide-react';
 import { Button } from "@/components/ui/button";
-import { OutlineButton } from "@/components/ui/outline-button";
 import { FeatureCard } from "@/components/featureCard";
+import { useContext } from "react";
+import { AuthContex } from "@/context/AuthContext";
+import Link from "next/link";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -17,6 +19,8 @@ const geistMono = Geist_Mono({
 });
 
 export default function Home() {
+  const { user, logoutUser } = useContext(AuthContex);
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-zinc-900 to-zinc-950">
       {/* Header/Navigation */}
@@ -34,10 +38,22 @@ export default function Home() {
             </span>
           </div>
           <div className="hidden md:flex items-center space-x-8">
-            <a href="#features" className="text-gray-500 hover:text-cyan-500 transition-colors">Recursos</a>
-            <a href="/login" className="text-gray-500 hover:text-cyan-500 transition-colors">login</a>
-            <a href="/register" className="text-gray-500 hover:text-cyan-500 transition-colors">register</a>
-
+            {user ? (
+              <>
+                <Link href="/dashboard">
+                  {user ? user.name : 'Carregando...'}
+                </Link>
+                <a className="cursor-pointer text-red-500" onClick={logoutUser}>
+                  Sair
+                </a>
+              </>
+            ) : (
+              <>
+                <Link href="#features" className="text-gray-500 hover:text-cyan-500 transition-colors">Recursos</Link>
+                <Link href="/login" className="text-gray-500 hover:text-cyan-500 transition-colors">login</Link>
+                <Link href="/register" className="text-gray-500 hover:text-cyan-500 transition-colors">register</Link>
+              </>
+            )}
           </div>
         </div>
       </nav>
