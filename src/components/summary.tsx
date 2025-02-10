@@ -7,6 +7,7 @@ import { startOfWeek, format, endOfWeek } from 'date-fns';
 import { ptBR } from "date-fns/locale";
 import { PendingGoals } from "./peding-Goals";
 import { useRouter } from "next/router";
+import { api } from "@/services/apiClient";
 
 
 interface SummaryProps {
@@ -34,9 +35,29 @@ export function Summary({ data }: SummaryProps) {
   const lastDayOfWeek = format(endOfWeek(new Date()), 'd MMM', { locale: ptBR });
   const completedPercentage = Math.round((data.completed * 100) / data.total);
 
+  async function handleUndo(id: string) {
+    const confirmDelete = confirm("Desfazer essa meta?");
+
+    if (confirmDelete) {
+      await api.delete('/undo', {
+        data: { id: id }
+      });
+      window.location.reload();
+    }
+  }
+
+  async function handleUndoAllGoals() {
+    const confirmDelete = confirm("Desfazer todas as  metas?");
+
+    if (confirmDelete) {
+      await api.delete('/delete-all-goal-completion');
+      window.location.reload();
+    }
+  }
+
   return (
     <>
-      <div className="py-10 max-w-[480px] w-full px-5 mx-auto flex flex-col gap-6">
+      <div className="py-10 max-w-[480px] w-full px-5 mx-auto flex flex-col gap-6 md:max-w-[780px]">
         <div className="flex items-center justify-between">
           <span className="text-lg font-semibold capitalize">{firstDayOfWeek} - {lastDayOfWeek}</span>
           <div className="flex gap-3">
@@ -65,7 +86,13 @@ export function Summary({ data }: SummaryProps) {
           <PendingGoals />
 
           <div className="flex flex-col gap-6">
-            <h2 className="text-xl font-medium">Sua semana</h2>
+            <div className="flex gap-3 justify-between items-center">
+              <h2 className="text-xl font-medium">Sua semana</h2>
+              <Button
+                onClick={handleUndoAllGoals}
+              >Desfazer todas as metas
+              </Button>
+            </div>
             {Object.entries(data.goalsPerDay).map(([date, goals]) => {
 
               const weekDay = format(new Date(date + 'T00:00:00'), 'eeee', { locale: ptBR });
@@ -86,7 +113,11 @@ export function Summary({ data }: SummaryProps) {
                             Você completou "<span className="text-zinc-100">{goal.title}</span>" às
                             <span className="text-zinc-100 ml-1">{time}</span>
                           </span>
-                          <button className="text-zinc-400 text-sm border-b border-b-zinc-400">Desfazer</button>
+                          <button
+                            className="text-zinc-400 text-sm border-b border-b-zinc-400"
+                            onClick={() => handleUndo(goal.id)}
+                          >Desfazer
+                          </button>
                         </li>
                       )
                     })}
@@ -106,10 +137,10 @@ export function Summary({ data }: SummaryProps) {
 
 function ReloadButton() {
   const router = useRouter();
-
   function handleReload() {
     router.reload();
   }
+
 
   return (
     <Button

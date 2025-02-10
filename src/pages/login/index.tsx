@@ -86,7 +86,7 @@ export default function Login() {
   );
 }
 
-export const getServerSideProps = canSSRGuest(async (ctx) => {
+export const getServerSideProps = canSSRGuest(async () => {
   return {
     props: {}
   }

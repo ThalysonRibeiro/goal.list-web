@@ -1,7 +1,8 @@
-import { Plus } from "lucide-react";
+import { Plus, RefreshCw, Trash } from "lucide-react";
 import { OutlineButton } from "./ui/outline-button";
 import { api } from "@/services/apiClient";
 import { useEffect, useState } from "react";
+import { setupApiClient } from "@/services/api";
 
 interface PendingGoalsResponse {
   id: string;
@@ -18,7 +19,9 @@ export function PendingGoals() {
 
   async function getPendingGoals() {
     try {
-      const response = await api.get('/pending-goals');
+      const apiClient = setupApiClient();
+      const response = await apiClient.get('/pending-goals');
+
       setPendingGoals(response.data);
     } catch (error) {
       console.error('Error fetching pending goals:', error);
@@ -33,7 +36,10 @@ export function PendingGoals() {
   }, []);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <div className="flex gap-3 ">
+      <RefreshCw className="size-6 animate-spin" color="cyan" />
+      Loading...
+    </div>;
   }
 
   if (error) {
@@ -42,10 +48,8 @@ export function PendingGoals() {
 
   async function handleCompleteGoal(goalId: string) {
     try {
-      console.log('Tentando completar o objetivo:', goalId); // Log para debug
-
       const response = await api.post('/completions', {
-        goal_id: goalId  // Alterado de ggoal_id para goal_id
+        goal_id: goalId
       });
 
       await getPendingGoals();
@@ -53,7 +57,7 @@ export function PendingGoals() {
       setPendingGoals(currentGoals =>
         currentGoals.map(goal =>
           goal.id === goalId
-            ? { ...goal, completionCount: goal.completionCount + 1 }
+            ? { ...goal, completionCount: goal.completionCount * 1 }
             : goal
         )
       );
@@ -65,17 +69,35 @@ export function PendingGoals() {
     }
   }
 
+  async function handleDeleteGoal(id: string) {
+    const confirmDelete = confirm("Tem certeza que quer deletar essa meta?");
+
+    if (confirmDelete) {
+      await api.delete('/delete-goal', {
+        data: { id: id }
+      });
+      window.location.reload();
+    }
+  }
+
   return (
     <div className="flex flex-wrap gap-3">
       {pendingGoals.map(goal => (
-        <OutlineButton
-          key={goal.id}
-          disabled={goal.completionCount >= goal.desired_weekly_frequency}
-          onClick={() => handleCompleteGoal(goal.id)}
-        >
-          <Plus className="size-4 text-zinc-600" />
-          {goal.title} ({goal.completionCount}/{goal.desired_weekly_frequency})
-        </OutlineButton>
+        <div className="flex items-center gap-2 border-r border-zinc-800 border-dashed  rounded-full hover:border-zinc-700">
+          <OutlineButton
+            key={goal.id}
+            disabled={goal.completionCount >= goal.desired_weekly_frequency}
+            onClick={() => handleCompleteGoal(goal.id)}
+          >
+            <Plus className="size-4 text-zinc-600" />
+            {goal.title} ({goal.completionCount}/{goal.desired_weekly_frequency})
+          </OutlineButton>
+          <button
+            onClick={() => handleDeleteGoal(goal.id)}
+          >
+            <Trash className="size-4 text-red-500 mr-2" />
+          </button>
+        </div>
       ))}
     </div>
   );

@@ -98,13 +98,10 @@ export function AuthProvider({ children }: AuthProviderProps) {
         id,
         name,
         email: responseEmail,
-        errorMessage: '', // Limpar mensagem de erro ao fazer login com sucesso
+        errorMessage: '',
       });
 
-      // api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
       api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-
-
 
       Router.push('/dashboard');
 
@@ -112,7 +109,6 @@ export function AuthProvider({ children }: AuthProviderProps) {
       if (axios.isAxiosError(error) && error.response) {
         const apiMessage = error.response.data.message;
         setUser(apiMessage);
-        // Definindo a mensagem de erro no estado do usuário
         setUser((prevUser) => prevUser ? { ...prevUser, errorMessage: apiMessage } : null);
       } else {
         console.log("Erro inesperado:", error);
