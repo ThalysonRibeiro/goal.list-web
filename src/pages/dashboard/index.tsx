@@ -33,8 +33,8 @@ export default function Dashboard(summary: SummaryResponse) {
 
   return (
     <Dialog>
+      <Header name={user?.name} />
       <div className="flex items-center justify-center flex-col">
-        <Header name={user?.name} />
 
         {data?.total > 0 ? <Summary data={data} /> : <EmptyGoal />}
 

@@ -66,7 +66,7 @@ function DropdownMenu() {
       {isOpen && (
         <div className="absolute right-0 mt-2 bg-zinc-900 shadow-lg rounded border border-zinc-800 z-10">
 
-          <Link href="/settings">
+          <Link href="/dashboard/settings">
             <div className="flex items-center px-4 py-2 hover:bg-zinc-950/50">
               <Settings size={24} color="#8b5cf6" />
               <span className="ml-2 text-zinc-500">Configurações</span>

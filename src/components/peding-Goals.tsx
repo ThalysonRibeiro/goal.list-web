@@ -48,7 +48,8 @@ export function PendingGoals() {
 
   async function handleCompleteGoal(goalId: string) {
     try {
-      const response = await api.post('/completions', {
+      const apiClient = setupApiClient();
+      const response = await apiClient.post('/completions', {
         goal_id: goalId
       });
 
@@ -83,9 +84,8 @@ export function PendingGoals() {
   return (
     <div className="flex flex-wrap gap-3">
       {pendingGoals.map(goal => (
-        <div className="flex items-center gap-2 border-r border-zinc-800 border-dashed  rounded-full hover:border-zinc-700">
+        <div key={goal.id} className="flex items-center gap-2 border-r border-zinc-800 border-dashed  rounded-full hover:border-zinc-700">
           <OutlineButton
-            key={goal.id}
             disabled={goal.completionCount >= goal.desired_weekly_frequency}
             onClick={() => handleCompleteGoal(goal.id)}
           >

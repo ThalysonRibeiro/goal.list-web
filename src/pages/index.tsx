@@ -1,7 +1,7 @@
 import Image from "next/image";
 import logoImg from "@/assets/logo-goallist.png";
 import { Geist, Geist_Mono } from "next/font/google";
-import { CheckCircle, List, ArrowRight, Star, Shield } from 'lucide-react';
+import { CheckCircle, List, ArrowRight, Star, Shield, User } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { FeatureCard } from "@/components/featureCard";
 import { useContext } from "react";
@@ -40,8 +40,9 @@ export default function Home() {
           <div className="hidden md:flex items-center space-x-8">
             {user ? (
               <>
-                <Link href="/dashboard">
+                <Link href="/dashboard" className="flex gap-3">
                   {user ? user.name : 'Carregando...'}
+                  <User />
                 </Link>
                 <a className="cursor-pointer text-red-500" onClick={logoutUser}>
                   Sair
@@ -72,10 +73,12 @@ export default function Home() {
               Organize, acompanhe e alcance suas metas com uma plataforma intuitiva que mantém você focado no que realmente importa.
             </p>
             <div className="flex space-x-4">
-              <Button>
-                Comece Agora
-                <ArrowRight className="ml-2 w-5 h-5" />
-              </Button>
+              <Link href="/register">
+                <Button>
+                  Comece Agora
+                  <ArrowRight className="ml-2 w-5 h-5" />
+                </Button>
+              </Link>
             </div>
           </div>
           <div className="md:w-1/2">
@@ -123,9 +126,11 @@ export default function Home() {
           <p className="text-lg mb-8 max-w-2xl mx-auto">
             Junte-se a milhares de pessoas que já estão alcançando suas metas com nossa plataforma.
           </p>
-          <button className="bg-white text-blue-500 hover:bg-blue-50 px-8 py-3 rounded-md transition-colors font-semibold">
-            Criar Conta
-          </button>
+          <Link href="/register">
+            <button className="bg-white text-blue-500 hover:bg-blue-50 px-8 py-3 rounded-md transition-colors font-semibold">
+              Criar Conta
+            </button>
+          </Link>
         </div>
       </section>
 

@@ -72,7 +72,7 @@ export function Summary({ data }: SummaryProps) {
         </div>
 
         <div className="flex flex-col gap-3">
-          <Progress max={data.completed} value={data.total}>
+          <Progress max={data.total} value={data.completed}>
             <ProgressIndicator style={{ width: `${completedPercentage}%` }} />
           </Progress>
 
@@ -95,8 +95,8 @@ export function Summary({ data }: SummaryProps) {
             </div>
             {Object.entries(data.goalsPerDay).map(([date, goals]) => {
 
-              const weekDay = format(new Date(date + 'T00:00:00'), 'eeee', { locale: ptBR });
-              const formattedDate = format(new Date(date + 'T00:00:00'), "d 'de' MMMM", { locale: ptBR });
+              const weekDay = format(new Date(date + 'T03:00:00Z'), 'eeee', { locale: ptBR });
+              const formattedDate = format(new Date(date + 'T03:00:00Z'), "d 'de' MMMM", { locale: ptBR });
 
               return (
                 <div key={date} className="flex flex-col gap-4">
@@ -107,12 +107,14 @@ export function Summary({ data }: SummaryProps) {
                     {goals.map(goal => {
                       const time = format(new Date(goal.completedAt), 'HH:mm')
                       return (
-                        <li key={goal.completedAt} className="flex items-center gap-2">
-                          <CheckCircle2 className="size-4 text-cyan-500" />
-                          <span className="text-zinc-400 text-sm">
-                            Você completou "<span className="text-zinc-100">{goal.title}</span>" às
-                            <span className="text-zinc-100 ml-1">{time}</span>
-                          </span>
+                        <li key={goal.completedAt} className="flex items-center gap-2 justify-between">
+                          <div className="flex gap-2">
+                            <CheckCircle2 className="size-4 text-cyan-500" />
+                            <span className="text-zinc-400 text-sm inline-flex">
+                              Você completou "<span className="text-zinc-100 truncate inline-block max-w-[170px] md:text-clip md:max-w-[470px]">{goal.title}</span>" às
+                              <span className="text-zinc-100 ml-1">{time}</span>
+                            </span>
+                          </div>
                           <button
                             className="text-zinc-400 text-sm border-b border-b-zinc-400"
                             onClick={() => handleUndo(goal.id)}
@@ -125,7 +127,6 @@ export function Summary({ data }: SummaryProps) {
                 </div>
               )
             })}
-
 
           </div>
         </div>
