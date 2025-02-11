@@ -12,7 +12,7 @@ interface HeaderProps {
 export function Header({ name }: HeaderProps) {
 
   return (
-    <nav className="flex max-w-7xl w-full p-3 justify-between relative">
+    <nav className="flex max-w-3xl mt-3 py-3 px-2 w-full rounded-full justify-between relative border border-zinc-800">
       <div className="inline-flex justify-center items-center gap-2">
         <Image
           alt="logo do site goal list"
@@ -60,7 +60,7 @@ function DropdownMenu() {
     <div className="relative" ref={dropdownRef}>
 
       <button onClick={toggleDropdown}>
-        <User size={32} color="#8b5cf6" />
+        <User size={28} color="#8b5cf6" />
       </button>
 
       {isOpen && (

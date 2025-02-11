@@ -3,6 +3,7 @@ import { OutlineButton } from "./ui/outline-button";
 import { api } from "@/services/apiClient";
 import { useEffect, useState } from "react";
 import { setupApiClient } from "@/services/api";
+import { Bounce, toast } from "react-toastify";
 
 interface PendingGoalsResponse {
   id: string;
@@ -49,7 +50,7 @@ export function PendingGoals() {
   async function handleCompleteGoal(goalId: string) {
     try {
       const apiClient = setupApiClient();
-      const response = await apiClient.post('/completions', {
+      await apiClient.post('/completions', {
         goal_id: goalId
       });
 
@@ -74,10 +75,22 @@ export function PendingGoals() {
     const confirmDelete = confirm("Tem certeza que quer deletar essa meta?");
 
     if (confirmDelete) {
-      await api.delete('/delete-goal', {
+      const apiClient = setupApiClient();
+      await apiClient.delete('/delete-goal', {
         data: { id: id }
       });
       window.location.reload();
+      toast.success("Meta deleta!", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Bounce,
+      });
     }
   }
 

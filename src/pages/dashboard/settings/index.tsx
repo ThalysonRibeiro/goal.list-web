@@ -6,6 +6,7 @@ import { ChangePassword } from "./components/changePassword";
 import { DeleteUser } from "./components/deleteUser";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { canSSRAuth } from "@/utils/canSSRAuth";
 
 export default function Settings() {
   return (
@@ -52,3 +53,10 @@ export default function Settings() {
     </div>
   )
 }
+
+
+export const getServerSideProps = canSSRAuth(async (ctx) => {
+  return {
+    props: {}
+  }
+})

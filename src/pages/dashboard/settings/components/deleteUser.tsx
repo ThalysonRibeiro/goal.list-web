@@ -3,6 +3,7 @@ import { useState } from "react";
 import Router from "next/router";
 import { setupApiClient } from "@/services/api";
 import { destroyCookie } from "nookies";
+import { Bounce, toast } from "react-toastify";
 
 export function DeleteUser() {
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
@@ -12,7 +13,19 @@ export function DeleteUser() {
       const apiClient = setupApiClient();
       await apiClient.delete('/delete-user');
       destroyCookie(null, '@goallist.token', { path: '/' });
-      alert('Conta excluída com sucesso!');
+
+      toast.success("Conta excluída com sucesso!", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Bounce,
+      });
+      window.location.reload();
       Router.push('/');
     } catch (error) {
       console.log(error);

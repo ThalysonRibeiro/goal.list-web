@@ -4,6 +4,7 @@ import { Label } from "@/components/ui/label";
 import { AuthContex } from "@/context/AuthContext";
 import { setupApiClient } from "@/services/api";
 import { useContext, useState } from "react";
+import { Bounce, toast } from "react-toastify";
 
 export function ChangeName() {
   const { user } = useContext(AuthContex);
@@ -15,7 +16,17 @@ export function ChangeName() {
       name: newname
     });
 
-    alert("Nome alterado com sucesso!")
+    toast.success("Nome alterado com sucesso!", {
+      position: "top-center",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: false,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+      transition: Bounce,
+    });
   }
 
   return (

@@ -3,6 +3,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { setupApiClient } from "@/services/api";
 import { useEffect, useState } from "react";
+import { Bounce, toast } from "react-toastify";
 
 export function ChangePassword() {
   const [currentPassword, setCurrentPassword] = useState("");
@@ -34,7 +35,18 @@ export function ChangePassword() {
       setCurrentPassword("");
       setNewPassword("");
       setConfirmPassword("");
-      alert("Senha laterada com sucesso!");
+
+      toast.success("Senha laterada com sucesso!", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Bounce,
+      });
 
     } catch (error) {
       if (error.response && error.response.data) {

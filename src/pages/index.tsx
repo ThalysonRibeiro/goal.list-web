@@ -61,8 +61,8 @@ export default function Home() {
 
       {/* Hero Section */}
       <section className="container mx-auto px-6 py-20">
-        <div className="flex flex-col md:flex-row items-center">
-          <div className="md:w-1/2 mb-10 md:mb-0">
+        <div className="flex flex-col md:flex-row items-center justify-center">
+          <div className="mb-10 md:mb-0">
             <h1 className="text-4xl md:text-5xl font-bold leading-tight mb-6">
               Transforme seus objetivos em
               <span className="bg-gradient-to-r from-blue-500 to-purple-600 bg-clip-text text-transparent">
@@ -80,13 +80,6 @@ export default function Home() {
                 </Button>
               </Link>
             </div>
-          </div>
-          <div className="md:w-1/2">
-            <img
-              src="https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?auto=format&fit=crop&w=800&q=80"
-              alt="Planejamento e Organização"
-              className="rounded-lg shadow-2xl"
-            />
           </div>
         </div>
       </section>

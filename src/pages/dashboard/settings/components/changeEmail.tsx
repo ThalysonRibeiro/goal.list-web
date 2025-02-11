@@ -5,6 +5,7 @@ import { AuthContex } from "@/context/AuthContext";
 import { setupApiClient } from "@/services/api";
 import { response } from "express";
 import { useContext, useState } from "react";
+import { Bounce, toast } from "react-toastify";
 
 
 
@@ -23,7 +24,17 @@ export function ChangeEmail() {
       });
 
       setEmailError("");
-      alert("Email alterado com sucesso!");
+      toast.success("Email alterado com sucesso!", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Bounce,
+      });
 
     } catch (error) {
       if (error.response && error.response.data) {

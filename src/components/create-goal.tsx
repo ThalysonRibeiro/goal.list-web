@@ -10,6 +10,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useContext } from "react";
 import { AuthContex } from "@/context/AuthContext";
 import { api } from "@/services/apiClient";
+import { Bounce, toast } from "react-toastify";
 
 const createGoalForm = z.object({
   title: z.string().min(1, "Informe  a atividade qeu deseja realizar"),
@@ -34,6 +35,17 @@ export function CreateGoal() {
     });
 
     reset();
+    toast.success("Nova metas cadastrada com sucesso!", {
+      position: "top-center",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: false,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+      transition: Bounce,
+    });
 
   }
 
@@ -123,7 +135,7 @@ export function CreateGoal() {
 
             <div className="flex items-center gap-3">
               <DialogTrigger asChild>
-                <Button variant="secondary" type="button" className="flex-1">
+                <Button variant="secondary" type="button" className="flex-1" onClick={() => window.location.reload()}>
                   Fechar
                 </Button>
               </DialogTrigger>
