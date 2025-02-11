@@ -5,7 +5,7 @@ import { setupApiClient } from "@/services/api";
 import { destroyCookie } from "nookies";
 import { Bounce, toast } from "react-toastify";
 
-export function DeleteUser() {
+export default function DeleteUser() {
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
 
   async function handleDeleteAccount() {

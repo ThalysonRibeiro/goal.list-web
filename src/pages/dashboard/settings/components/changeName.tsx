@@ -6,7 +6,7 @@ import { setupApiClient } from "@/services/api";
 import { useContext, useState } from "react";
 import { Bounce, toast } from "react-toastify";
 
-export function ChangeName() {
+export default function ChangeName() {
   const { user } = useContext(AuthContex);
   const [newname, setNewName] = useState(user?.name);
 

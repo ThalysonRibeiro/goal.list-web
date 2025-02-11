@@ -5,7 +5,7 @@ import { setupApiClient } from "@/services/api";
 import { useEffect, useState } from "react";
 import { Bounce, toast } from "react-toastify";
 
-export function ChangePassword() {
+export default function ChangePassword() {
   const [currentPassword, setCurrentPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");

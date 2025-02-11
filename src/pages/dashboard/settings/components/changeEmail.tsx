@@ -8,7 +8,7 @@ import { Bounce, toast } from "react-toastify";
 
 
 
-export function ChangeEmail() {
+export default function ChangeEmail() {
   const { user } = useContext(AuthContex);
   const [currentEmail, setCurrentEmail] = useState(user?.email);
   const [newEmail, setNewEmail] = useState("");
