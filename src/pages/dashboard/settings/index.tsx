@@ -1,12 +1,12 @@
 import Image from "next/image";
 import logoImg from "@/assets/logo-goallist.png";
-import { ChangeEmail } from "./components/changeEmail";
-import { ChangeName } from "./components/changeName";
-import { ChangePassword } from "./components/changePassword";
-import { DeleteUser } from "./components/deleteUser";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { canSSRAuth } from "@/utils/canSSRAuth";
+import ChangeName from "./components/changeName";
+import ChangeEmail from "./components/changeEmail";
+import ChangePassword from "./components/changePassword";
+import DeleteUser from "./components/deleteUser";
 
 export default function Settings() {
   return (
