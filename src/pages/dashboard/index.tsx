@@ -1,12 +1,12 @@
 import { AuthContex } from "@/context/AuthContext";
 import { canSSRAuth } from "@/utils/canSSRAuth";
 import { useContext } from "react";
-import { Header } from "./components/header";
 import { Dialog } from "@/components/ui/dialog";
 import { CreateGoal } from "@/components/create-goal";
 import { Summary } from "@/components/summary";
 import { setupApiClient } from "@/services/api";
 import { EmptyGoal } from "@/components/empyt-goal";
+import Header from "./components/header";
 
 
 interface SummaryResponse {

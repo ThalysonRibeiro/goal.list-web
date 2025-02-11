@@ -9,7 +9,7 @@ interface HeaderProps {
   name: string;
 }
 
-export function Header({ name }: HeaderProps) {
+export default function Header({ name }: HeaderProps) {
 
   return (
     <nav className="flex max-w-3xl mt-3 py-3 px-2 w-full rounded-full justify-between relative border border-zinc-800">
