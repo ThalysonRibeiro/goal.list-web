@@ -79,4 +79,8 @@ NEXT_PUBLIC_API_URL=sua_url_da_api
 
 Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
 
+## 👥 Autores
+
+- Thalyson - [GitHub](https://github.com/ThalysonRibeiro)
+
 - Versão atual: 0.1.0
