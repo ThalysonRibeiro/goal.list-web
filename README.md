@@ -33,7 +33,7 @@ Uma aplicação web moderna para gerenciamento de metas e objetivos, permitindo 
 
 1. Clone o repositório:
 ```bash
-git clone [url-do-repositório]
+git clone https://github.com/ThalysonRibeiro/goal.list-web
 ```
 
 2. Instale as dependências:
