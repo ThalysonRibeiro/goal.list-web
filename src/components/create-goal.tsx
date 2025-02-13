@@ -4,13 +4,13 @@ import { Label } from "./ui/label";
 import { Input } from "./ui/input";
 import { RadioGroup, RadioGroupIndicator, RadioGroupItem } from "./ui/radio-group";
 import { Button } from "./ui/button";
-import { string, z } from "zod";
+import { z } from "zod";
 import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useContext } from "react";
 import { AuthContex } from "@/context/AuthContext";
-import { api } from "@/services/apiClient";
 import { Bounce, toast } from "react-toastify";
+import { setupApiClient } from "@/services/api";
 
 const createGoalForm = z.object({
   title: z.string().min(1, "Informe  a atividade qeu deseja realizar"),
@@ -28,7 +28,8 @@ export function CreateGoal() {
   })
 
   async function handleCreateGoal(data: CreateGoalForm) {
-    await api.post('/goals', {
+    const apiClient = setupApiClient()
+    await apiClient.post('/goals', {
       user_id: user.id,
       title: data.title,
       desired_weekly_frequency: data.desired_weekly_frequency,
@@ -133,7 +134,7 @@ export function CreateGoal() {
               </div>
             </div>
 
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-3 pb-3">
               <DialogTrigger asChild>
                 <Button variant="secondary" type="button" className="flex-1" onClick={() => window.location.reload()}>
                   Fechar

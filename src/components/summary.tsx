@@ -111,7 +111,7 @@ export function Summary({ data }: SummaryProps) {
                           <div className="flex gap-2">
                             <CheckCircle2 className="size-4 text-cyan-500" />
                             <span className="text-zinc-400 text-sm inline-flex">
-                              Você completou "<span className="text-zinc-100 truncate inline-block max-w-[170px] md:text-clip md:max-w-[470px]">{goal.title}</span>" às
+                              Você completou "<span className="text-zinc-100 truncate inline-block max-w-[120px] md:text-clip md:max-w-[470px]">{goal.title}</span>" às
                               <span className="text-zinc-100 ml-1">{time}</span>
                             </span>
                           </div>
