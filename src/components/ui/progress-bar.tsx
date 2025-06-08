@@ -4,7 +4,7 @@ export function Progress(props: ProgressPrimitive.ProgressProps) {
   return (
     <ProgressPrimitive.Progress
       {...props}
-      className="bg-zinc-900 rounded-full h-2"
+      className="relative h-2 w-full overflow-hidden rounded-full bg-slate-800/50 border border-slate-700/50"
     />
   )
 }
@@ -15,7 +15,7 @@ export function ProgressIndicator(
   return (
     <ProgressPrimitive.Indicator
       {...props}
-      className="bg-gradient-to-r from-cyan-500 to-violet-500 w-1/2 h-2 rounded-full"
+      className="h-full w-full flex-1 bg-gradient-to-r from-blue-500 via-purple-500 to-cyan-500 transition-all duration-500 ease-out rounded-full shadow-lg"
     />
   )
 }
