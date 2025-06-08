@@ -8,7 +8,7 @@ import { z } from "zod";
 import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useContext } from "react";
-import { AuthContex } from "@/context/AuthContext";
+import { AuthContext } from "@/context/AuthContext";
 import { Bounce, toast } from "react-toastify";
 import { setupApiClient } from "@/services/api";
 
@@ -20,7 +20,7 @@ const createGoalForm = z.object({
 type CreateGoalForm = z.infer<typeof createGoalForm>
 
 export function CreateGoal() {
-  const { user } = useContext(AuthContex);
+  const { user } = useContext(AuthContext);
 
 
   const { register, control, handleSubmit, formState, reset } = useForm<CreateGoalForm>({

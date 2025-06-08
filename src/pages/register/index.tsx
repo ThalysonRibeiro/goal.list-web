@@ -7,7 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import Image from "next/image";
 import { useContext, useState } from 'react';
-import { AuthContex } from '@/context/AuthContext';
+import { AuthContext } from '@/context/AuthContext';
 import { canSSRGuest } from '@/utils/canSSRGuest';
 
 const schema = z.object({
@@ -34,7 +34,7 @@ export default function Register() {
     resolver: zodResolver(schema),
   });
 
-  const { signUp, errorCreate } = useContext(AuthContex);
+  const { signUp, errorCreate } = useContext(AuthContext);
 
 
   const onSubmit: SubmitHandler<FormData> = async (data) => {

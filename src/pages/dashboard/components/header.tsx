@@ -3,7 +3,7 @@ import logoImg from "@/assets/logo-goallist.png";
 import Link from "next/link";
 import { Settings, User, LogOutIcon, Sparkles } from "lucide-react";
 import { useContext, useEffect, useRef, useState } from "react";
-import { AuthContex } from "@/context/AuthContext";
+import { AuthContext } from "@/context/AuthContext";
 
 interface HeaderProps {
   name: string;
@@ -39,7 +39,7 @@ export default function Header({ name }: HeaderProps) {
 }
 
 function DropdownMenu() {
-  const { logoutUser } = useContext(AuthContex);
+  const { logoutUser } = useContext(AuthContext);
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef(null);
 

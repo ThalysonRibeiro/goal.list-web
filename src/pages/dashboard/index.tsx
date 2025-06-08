@@ -1,4 +1,4 @@
-import { AuthContex } from "@/context/AuthContext";
+import { AuthContext } from "@/context/AuthContext";
 import { canSSRAuth } from "@/utils/canSSRAuth";
 import { useContext } from "react";
 import { Dialog } from "@/components/ui/dialog";
@@ -27,7 +27,7 @@ interface SummaryResponse {
 
 
 export default function Dashboard(summary: SummaryResponse) {
-  const { user } = useContext(AuthContex);
+  const { user } = useContext(AuthContext);
   const { summary: data } = summary;
 
 

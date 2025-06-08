@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { AuthContex } from "@/context/AuthContext";
+import { AuthContext } from "@/context/AuthContext";
 import { setupApiClient } from "@/services/api";
 import { useContext, useState } from "react";
 import { Bounce, toast } from "react-toastify";
@@ -9,7 +9,7 @@ import { Bounce, toast } from "react-toastify";
 
 
 export default function ChangeEmail() {
-  const { user } = useContext(AuthContex);
+  const { user } = useContext(AuthContext);
   const [currentEmail, setCurrentEmail] = useState(user?.email);
   const [newEmail, setNewEmail] = useState("");
   const [emailError, setEmailError] = useState("");

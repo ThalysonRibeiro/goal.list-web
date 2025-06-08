@@ -5,7 +5,7 @@ import { createContext, ReactNode, useEffect, useState } from "react";
 import axios from 'axios';
 
 
-interface AuthCOntextData {
+interface AuthContextData {
   user: UserProps;
   errorCreate: ErrorCreate;
   isAuthenticated: boolean;
@@ -41,7 +41,7 @@ interface ErrorCreate {
 }
 
 
-export const AuthContex = createContext({} as AuthCOntextData);
+export const AuthContext = createContext({} as AuthContextData);
 
 export function signOut() {
   try {
@@ -156,7 +156,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
   }
 
   return (
-    <AuthContex.Provider value={{
+    <AuthContext.Provider value={{
       user,
       errorCreate,
       isAuthenticated,
@@ -165,6 +165,6 @@ export function AuthProvider({ children }: AuthProviderProps) {
       logoutUser,
     }}>
       {children}
-    </AuthContex.Provider>
+    </AuthContext.Provider>
   )
 }

@@ -4,11 +4,11 @@ import { CheckCircle, List, ArrowRight, Star, Shield, User, Target, TrendingUp, 
 import { Button } from "@/components/ui/button";
 import { FeatureCard } from "@/components/featureCard";
 import { useContext } from "react";
-import { AuthContex } from "@/context/AuthContext";
+import { AuthContext } from "@/context/AuthContext";
 import Link from "next/link";
 
 export default function Home() {
-  const { user, logoutUser } = useContext(AuthContex);
+  const { user, logoutUser } = useContext(AuthContext);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900/20 to-slate-900 relative overflow-hidden">
