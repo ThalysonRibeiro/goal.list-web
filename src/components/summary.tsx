@@ -151,7 +151,7 @@ export function Summary({ data }: SummaryProps) {
                           <span className="text-slate-300 text-sm">
                             Você completou "
                             <span className="text-white font-medium">{goal.title}</span>
-                            " às <span className="text-blue-400 font-medium">{time}</span>
+                            " às <span className=\"text-blue-400 font-medium">{time}</span>
                           </span>
                         </div>
                         <button
